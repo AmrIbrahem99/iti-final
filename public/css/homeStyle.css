@@ -1,0 +1,28 @@
+body{
+    background-color: #FAFAFA;
+}
+.home{
+    position: relative;
+}
+.sideDiv{
+    /* background-color: violet; */
+    position: fixed;
+    right: 10%;
+}
+
+.post{
+    background-color: white;
+    border: 1px solid gray ;
+    border-radius: 5px;
+}
+.icones{
+    font-size: 28px;
+}
+.icones a{
+    color: black;
+}
+.allFolwers{
+    text-decoration: none !important;
+
+}
+
