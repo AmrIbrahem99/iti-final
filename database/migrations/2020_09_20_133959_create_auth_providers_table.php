@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPostTable extends Migration
+class CreateAuthProvidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateUserPostTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_post', function (Blueprint $table) {
+        Schema::create('auth_providers', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('post_id')->unsigned();
+            $table->foreignId('user_id');
+            $table->string('provider');
+            $table->string('provider_user_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateUserPostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_post');
+        Schema::dropIfExists('auth_providers');
     }
 }

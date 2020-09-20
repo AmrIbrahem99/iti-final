@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use SoftDeletes;
@@ -24,17 +24,28 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
     }
-    public function users()
+    public function posts()
     {
         return $this->belongsToMany(Post::class, 'user_post');
     }
+
+
+    public function posts_likes()
+    {
+        return $this->belongsToMany(Post::class, 'likes');
+    }
+    public function authProviders()
+    {
+       return $this->hasMany('App\AuthProvider','user_id','id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'full_name','user_name', 'phone', 'email','password',
     ];
 
     /**
