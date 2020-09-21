@@ -20,12 +20,14 @@
                         </div>
                         <div class="col-11 row justify-content-between px-0">
                             <div class="col-9">
-                                <h6 class="pt-2"> {{$post->id}} </h6>
+                                <h6 class="pt-2"> {{$post->user->user_name}} </h6>
                             </div>
                             <div class="col-3 p-0">
-                                {{-- <p class="text-center pt-2">00</p> --}}
+                                {{-- @auth --}}
                                 <a href="{{route('posts.edit' , $post->id)}}" class="btn btn-outline-primary"> Edit</a>
                                 <a href="{{route('posts.delete' , $post->id)}}" class="btn btn-outline-danger"> Delete</a>
+                                {{-- @endauth --}}
+
 
                             </div>
                         </div>
@@ -68,7 +70,7 @@
 
 
 
-        <div class="col-lg-3 d-none d-lg-block offset-1 my-5  sideDiv">
+        <aside class="col-lg-3 d-none d-lg-block offset-1 my-5  sideDiv">
             <header class="row justify-content-between p-3">
                 <div>
                     <p class="text-muted ">Suggestions For You</p>
@@ -80,17 +82,27 @@
 
                 @foreach($suggests as $suggest)
                     <div class="row px-3">
-                        <div class="col-2 p-0">
-                            <img src="{{asset('uploads/profile/11.jpg')}}" class="rounded-circle w-100 pt-1" alt="">
-                        </div>
-                        <div class="col-10 row justify-content-between py-4">
-                            <div class="col-11 ">
-                               <h6 class="">{{$suggest->full_name}}</h6>
+
+                        <div class="col-10 p-0 row">
+
+                            <div class="col-4">
+                                <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                    <img src="{{asset('uploads/profile/11.jpg')}}" class="rounded-circle w-100 pt-1" alt="">
+                                </a>
+                                </div>
+                                <div class="col-8 pt-4">
+                                    <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                        <h6 class="">{{$suggest->full_name}}</h6>
+                                    </a>
+                                </div>
+                            </a>
+
                             </div>
-                            <div class="col-1 p-0">
-                                <a href="" class="">Follow</a>
-                            </div>
+
+                        <div class="col-2 text-right py-4 pr-0">
+                            <a href="" class="">Follow</a>
                         </div>
+
                     </div>
                 @endforeach
 
@@ -102,7 +114,7 @@
             <footer>
 
             </footer>
-        </div>
+        </aside>
     </section>
 
 
