@@ -8,7 +8,69 @@
 
 
 @section('content')
-    <a href="{{route('posts.create')}}" class="btn btn-outline-success"> New Post</a>
+    {{-- New Post --}}
+    <section>
+
+        <a type="button" href="{{route('posts.create')}}" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
+            New Post
+        </a>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" class="m-auto" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+
+                        @csrf
+
+                        <div class="modal-body">
+
+
+                            <div class="form-group">
+                                <textarea type="text" name="body" class="form-control" placeholder="Body ... " rows="4" ></textarea>
+                            </div>
+
+
+                            <div class="form-group my-5">
+                                <input type="file" class="" name="image">
+                            </div>
+
+                            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Post Now</button>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
     <section class="row home">
         <div class="col-lg-8 col-md-12  ">
 
@@ -27,6 +89,7 @@
                                 <a href="{{route('posts.edit' , $post->id)}}" class="btn btn-outline-primary"> Edit</a>
                                 <a href="{{route('posts.delete' , $post->id)}}" class="btn btn-outline-danger"> Delete</a>
                                 {{-- @endauth --}}
+
 
 
                             </div>
