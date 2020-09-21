@@ -72,6 +72,7 @@
 
 
     <section class="row home">
+
         <div class="col-lg-8 col-md-12  ">
 
             @foreach($posts as $post)
@@ -160,10 +161,10 @@
                                 </div>
                             </a>
 
-                            </div>
+                        </div>
 
                         <div class="col-2 text-right py-4 pr-0">
-                            <a href="" class="">Follow</a>
+                            <a href="{{route('user.follow' , $suggest->id)}}" class="">Follow</a>
                         </div>
 
                     </div>

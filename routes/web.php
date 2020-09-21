@@ -41,3 +41,6 @@ Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete')
 
 //-------------------------------------------
 // Route::get('/suggest', 'SuggestController@index')->name('suggests') ;
+
+Route::get('/follow/{id}' , 'FollowersControllers@follow')->name('user.follow');
+
