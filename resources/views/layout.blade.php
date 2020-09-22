@@ -13,6 +13,7 @@
   {{-- <link rel="shortcut icon" type="image/png" href="{{asset('img/insta-title.svg.png')}}"> --}}
   <link rel="shortcut icon" type="image/png" href="{{asset('img/insta.png')}}"> 
 
+
   @yield('styles')
 
 </head>
