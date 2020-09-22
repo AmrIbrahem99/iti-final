@@ -42,7 +42,7 @@ class PostsController extends Controller
         $img = $request->file('image') ;
         $ext = $img->getClientOriginalExtension() ;
         $name = uniqid() .".$ext" ;
-        $img->move( public_path('uploads/posts') ,$name ) ;
+        $img->move( public_path('img/posts') ,$name ) ;
 
         Post::create([
             'user_id' => '1' ,
@@ -69,7 +69,7 @@ class PostsController extends Controller
         $img = $request->file('image') ;
         $ext = $img->getClientOriginalExtension() ;
         $name = uniqid() .".$ext" ;
-        $img->move( public_path('uploads/posts') ,$name ) ;
+        $img->move( public_path('img/posts') ,$name ) ;
 
         Post::findOrFail($id)->update([
             'body'=> $request->body ,

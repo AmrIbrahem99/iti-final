@@ -3,19 +3,21 @@
 
 
 @section('title')
-    Home
+    Instagram
 @endsection
 
 
 @section('content')
     {{-- New Post --}}
-    <section>
-
-        <a type="button" href="{{route('posts.create')}}" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
+    <div style="padding: 2rem 0">
+    
+    <section >
+         
+        <a style="margin-top:10px" type="button" href="{{route('posts.create')}}" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
             New Post
         </a>
-
-
+    
+      
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -79,7 +81,7 @@
                 <div class="post my-5">
                     <header class="row px-3 py-2">
                         <div class="col-1 ">
-                            <img src="{{asset('uploads/profile/11.jpg')}}" class="rounded-circle w-100 pt-1" alt="">
+                            <img src="{{asset('img/users/' . $post->user->avatar)}}" class="rounded-circle w-100 pt-1" alt="">
                         </div>
                         <div class="col-11 row justify-content-between px-0">
                             <div class="col-9">
@@ -97,7 +99,7 @@
                         </div>
                     </header>
                     <div>
-                        <img src="{{asset('uploads/posts/'.$post->image)}}" class="w-100  pb-3"  alt="">
+                        <img src="{{asset('img/posts/'.$post->image)}}" class="w-100  pb-3"  alt="">
                     </div>
                     <footer class="">
                         <header class="row justify-content-between icones py-2 px-3">
@@ -151,7 +153,7 @@
 
                             <div class="col-4">
                                 <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
-                                    <img src="{{asset('uploads/profile/11.jpg')}}" class="rounded-circle w-100 pt-1" alt="">
+                                    <img src="{{asset('img/users/' . $suggest->avatar)}}" class="rounded-circle w-100 pt-1" alt="">
                                 </a>
                                 </div>
                                 <div class="col-8 pt-4">
@@ -181,5 +183,6 @@
         </aside>
     </section>
 
+</div>
 
 @endsection

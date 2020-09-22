@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify'=>true]);
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-Route::get('/posts', 'PostsController@index')->name('posts') ;
+Route::get('/posts', 'PostsController@index')->name('posts')->middleware('auth');
 Route::get('/redirect/facebook', 'Auth\LoginController@redirect');
 Route::get('login/callback/facebook', 'Auth\LoginController@callback');
 
@@ -28,19 +28,37 @@ Route::get('login/callback/facebook', 'Auth\LoginController@callback');
 
 //------------------Posts-------------------
 
-Route::get('/posts/create', 'PostsController@create')->name('posts.create');
-Route::post('/posts/store', 'PostsController@store')->name('posts.store');
+Route::get('/posts/create', 'PostsController@create')->name('posts.create')->middleware('auth');
+Route::post('/posts/store', 'PostsController@store')->name('posts.store')->middleware('auth');
 
 // show
 
-Route::get('/posts/edit/{id}', 'PostsController@edit')->name('posts.edit');
-Route::post('/posts/update/{id}', 'PostsController@update')->name('posts.update');
+Route::get('/posts/edit/{id}', 'PostsController@edit')->name('posts.edit')->middleware('auth');
+Route::post('/posts/update/{id}', 'PostsController@update')->name('posts.update')->middleware('auth');
 
 
-Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete');
+Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete')->middleware('auth');
 
 //-------------------------------------------
 // Route::get('/suggest', 'SuggestController@index')->name('suggests') ;
 
 Route::get('/follow/{id}' , 'FollowersControllers@follow')->name('user.follow');
 
+// ----------------------- User ------------------
+
+
+
+
+Route::get('/users/{id}' , 'UserController@profile')->name('users.profile')->where('id', '[0-9]+');
+
+Route::get('/users/{id}/edit' , 'UserController@edit')->name('users.edit')->middleware('auth');
+
+Route::put('/users/{id}' , 'UserController@update')->name('users.update')->middleware('auth');
+
+Route::put('/users/img/{id}' , 'UserController@updateImg')->name('users.updateImg')->middleware('auth');
+Route::get('/users/img/{id}' , 'UserController@deleteImg')->name('users.deleteImg')->middleware('auth');
+
+
+Route::get('/users/post/{id}' , 'UserController@viewpost')->name('users.viewpost');
+
+Route::get('/logout', 'UserController@logout')->name('logout');
