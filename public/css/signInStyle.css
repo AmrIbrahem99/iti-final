@@ -1,5 +1,4 @@
-
-/* Universal Selectors */
+* Universal Selectors */
 #root, body, html {
     height:100%;
   }
@@ -8,7 +7,7 @@
     overflow-y: scroll;
   }
 
-  a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe,img , ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
     margin:0;
     padding:0;
     border:0;
@@ -33,7 +32,7 @@
     line-height:18px;
   }
 
-  #root, article, main, div, section, header, nav, footer {
+  #root, article, main, section, header, footer {
     border: 0 solid #000000;
     box-sizing: border-box;
     align-items: stretch;
@@ -51,7 +50,43 @@
       -moz-box-direction: normal;
   } /* <--Universal Selectors End */
 
+   .header {
 
+    border: 0 solid #000000;
+    box-sizing: border-box;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin:0;
+    padding:0;
+    position: relative;
+    -webkit-box-align: stretch;
+      -moz-box-align: stretch;
+    -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+    -webkit-box-direction: normal;
+      -moz-box-direction: normal;
+   }
+
+   .app-img {
+
+    border: 0 solid #000000;
+    box-sizing: border-box;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin:0;
+    padding:0;
+    position: relative;
+    -webkit-box-align: stretch;
+      -moz-box-align: stretch;
+    -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+    -webkit-box-direction: normal;
+      -moz-box-direction: normal;
+   }
   #root {
     z-index: 0;
   }
@@ -315,7 +350,7 @@
       margin:0 auto;
     }
 
-    .btn {
+    /* .btn {
       cursor: pointer;
       width: 100%;
       padding:0 8px;
@@ -329,7 +364,7 @@
       line-height: 26px;
       outline: none;
       white-space: nowrap;
-    }
+    } */
 
     .input-box {
       border: 1px solid #efefef;
@@ -378,14 +413,3 @@
 
 
 
-
-
-
-
-
-/*
-  .signInRemember{
-      width: 20px;
-      height: 20px;
-
-    } */

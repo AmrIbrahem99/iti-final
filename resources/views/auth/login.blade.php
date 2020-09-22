@@ -1,7 +1,6 @@
 @extends('layout')
 @section('styles')
   <link rel="stylesheet" href="{{ asset('css/signInStyle.css') }}">
-
 @endsection
 
 
@@ -11,7 +10,8 @@
 
 @section('content')
 
-
+<div style="padding: 2rem 0">
+<div class="text-center m-auto">
     <span id="root">
       <section class="section-all">
 
@@ -22,14 +22,16 @@
               <div class="content">
                 <div class="login-box">
                   <div class="header">
+                      <div class="m-auto">
                     <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
-                  </div><!-- Header end -->
+                </div> 
+                </div><!-- Header end -->
                   <div class="form-wrap">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="input-box">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -40,7 +42,7 @@
                         </div>
 
                         <div class="input-box">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -124,13 +126,14 @@
               </ul>
             </nav>
 
-            <span class="footer-logo">&copy; 2018 Instagram</span>
+            <span class="footer-logo">&copy; 2020 Instagram</span>
           </div> <!-- Footer container end -->
         </footer>
 
       </section>
     </span> <!-- Root -->
-
+  </div>
+</div>
     <!-- Select Link -->
     <script type="text/javascript">
       function la(src) {
