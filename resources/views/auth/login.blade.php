@@ -1,5 +1,8 @@
 @extends('layout')
+@section('styles')
+  <link rel="stylesheet" href="{{ asset('css/signInStyle.css') }}">
 
+@endsection
 
 
 @section('title')
