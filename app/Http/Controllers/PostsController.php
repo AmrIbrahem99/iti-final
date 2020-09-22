@@ -6,8 +6,7 @@ use App\Post;
 use App\User;
 
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -26,8 +25,7 @@ class PostsController extends Controller
 
     public function create(){
         return view(
-            'posts.create'
-        );
+            'posts.create', compact('id'));
     }
 
     public function store(Request $request){
@@ -45,7 +43,7 @@ class PostsController extends Controller
         $img->move( public_path('img/posts') ,$name ) ;
 
         Post::create([
-            'user_id' => '1' ,
+            'user_id' => Auth::user()->id,
             'body' => $request->body ,
             'image'=> $name
         ]) ;

@@ -13,7 +13,7 @@
     
     <section >
          
-        <a style="margin-top:10px" type="button" href="{{route('posts.create')}}" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
+        <a style="margin-top:10px" type="button" href="" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
             New Post
         </a>
     
