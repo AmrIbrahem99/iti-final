@@ -8,7 +8,6 @@
   <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('css/homeStyle.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/signInStyle.css') }}">
 
 
   @yield('styles')
