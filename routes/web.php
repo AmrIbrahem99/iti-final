@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify'=>true]);
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-Route::get('/posts', 'PostsController@index')->name('posts')->middleware('auth');
+Route::get('/posts', 'PostsController@index' )->name('posts')->middleware('auth');
 Route::get('/redirect/facebook', 'Auth\LoginController@redirect');
 Route::get('login/callback/facebook', 'Auth\LoginController@callback');
 
@@ -62,3 +62,18 @@ Route::get('/users/img/{id}' , 'UserController@deleteImg')->name('users.deleteIm
 Route::get('/users/post/{id}' , 'UserController@viewpost')->name('users.viewpost');
 
 Route::get('/logout', 'UserController@logout')->name('logout');
+
+
+
+
+
+
+
+
+
+
+// -------------- save post ----------------
+
+Route::get('posts/save/{id}' , 'SavesController@save')->name('posts.save');
+
+

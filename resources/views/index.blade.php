@@ -10,14 +10,14 @@
 @section('content')
     {{-- New Post --}}
     <div style="padding: 2rem 0">
-    
+
     <section >
-         
+
         <a style="margin-top:10px" type="button" href="" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
             New Post
         </a>
-    
-      
+
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -81,7 +81,7 @@
                 <div class="post my-5">
                     <header class="row px-3 py-2">
                         <div class="col-1 ">
-                            <img src="{{asset('img/users/' . $post->user->avatar)}}" class="rounded-circle w-100 pt-1" alt="">
+                            <img src="{{asset('img/users/' . $post->user->avatar)}}" height="32px" class="rounded-circle w-100 pt-1" alt="">
                         </div>
                         <div class="col-11 row justify-content-between px-0">
                             <div class="col-9">
@@ -109,7 +109,10 @@
                                 <a href="" class="pr-2"><i class="fas fa-location-arrow"></i></a>
                             </div>
                             <div class="px-3">
-                                <a href=""><i class="far fa-bookmark"></i></a>
+                                @if (true)
+                                   <?php // dd($savePosts); ?>
+                                    <a href="{{route('posts.save', $post->id)}}"><i class="far fa-bookmark"></i></a>
+                                @endif
                             </div>
                         </header>
                         <div class="px-3">
@@ -153,7 +156,7 @@
 
                             <div class="col-4">
                                 <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
-                                    <img src="{{asset('img/users/' . $suggest->avatar)}}" class="rounded-circle w-100 pt-1" alt="">
+                                    <img src="{{asset('img/users/' . $suggest->avatar)}}" height="68px" class="rounded-circle w-100 pt-1" alt="">
                                 </a>
                                 </div>
                                 <div class="col-8 pt-4">

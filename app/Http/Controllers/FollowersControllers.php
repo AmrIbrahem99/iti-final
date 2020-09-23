@@ -11,6 +11,8 @@ class FollowersControllers extends Controller
 
     public function follow($suggest_id){
 
+
+
         DB::table('followers')->insert(
             [
                 'user_id' => 1,

@@ -11,16 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
 
-    public function index(){
+    public  function index(){
 
-        // $followrs = Follower::where('user_id', '=' , 'user_id' )->get();
+        $saves = new Post ;
+        $savePosts = $saves->users() ;
+        dd($savePosts) ;
 
-        // $posts = Post::where('user_id' , '=' , 'follower_id' )->get() ;
 
         $posts = Post::get() ;
+
         $suggests = User::inRandomOrder()->limit(5)->get() ;
 
-        return view( 'index' , compact('posts' , 'suggests')) ;
+
+        return view( 'index' , compact('posts' , 'suggests' )) ;
     }
 
     public function create(){

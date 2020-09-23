@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+// use App\SavePost ;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -28,8 +30,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Post::class, 'user_post');
     }
-
-
     public function posts_likes()
     {
         return $this->belongsToMany(Post::class, 'likes');
@@ -39,13 +39,23 @@ class User extends Authenticatable implements MustVerifyEmail
        return $this->hasMany('App\AuthProvider','user_id','id');
     }
 
+
+    // public function saves_posts()
+    // {
+    //    return $this->hasMany('App\SavePost');
+    // }
+
+
+
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'full_name', 'email', 'password', 'user_name' , 'gender' , 'website' , 
+        'full_name', 'email', 'password', 'user_name' , 'gender' , 'website' ,
         'phone' , 'bio' , 'avatar'
     ];
 
