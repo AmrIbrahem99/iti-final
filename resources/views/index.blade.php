@@ -78,6 +78,22 @@
         <div class="col-lg-8 col-md-12  ">
 
             @foreach($posts as $post)
+                <?php $tmp = false; ?>
+                     @foreach ($user as $u)
+                          
+                         @foreach ($u->followers as $follow)
+                             {{-- check if i follow the user who posted --}}
+                            @if (Auth::user()->id == $follow->user_id && $follow->follower_id == $post->user->id)
+                              <?php $tmp = true; ?> 
+                            @endif
+                            {{-- check if the post is mine --}}
+                            @if (Auth::user()->id == $post->user->id)
+                            <?php $tmp = true; ?> 
+                            @endif
+
+                         @endforeach
+                    @endforeach    
+              @if ($tmp)
                 <div class="post my-5">
                     <header class="row px-3 py-2">
                         <div class="col-1 ">
@@ -88,10 +104,11 @@
                                 <h6 class="pt-2"> {{$post->user->user_name}} </h6>
                             </div>
                             <div class="col-3 p-0">
-                                {{-- @auth --}}
+                                @if ($post->user->id == Auth::user()->id)
                                 <a href="{{route('posts.edit' , $post->id)}}" class="btn btn-outline-primary"> Edit</a>
                                 <a href="{{route('posts.delete' , $post->id)}}" class="btn btn-outline-danger"> Delete</a>
                                 {{-- @endauth --}}
+                                @endif
 
 
 
@@ -127,6 +144,8 @@
                         </footer>
                     </footer>
                 </div>
+           
+                @endif
             @endforeach
 
         </div>
@@ -145,10 +164,29 @@
                     <a href="" class="allFolwers" > <p class="text-dark "> See All</p></a>
                 </div>
             </header>
-
+            
                 @foreach($suggests as $suggest)
-                    <div class="row px-3">
+                       <?php $tmp = true ?>
+                       @if (Auth::user()->id == $suggest->id)
+                          <?php $tmp = false ?>
+                        @endif
 
+                        @foreach ($user as $u)
+                          
+                              @foreach ($u->followers as $follow)
+                                    
+                                 
+                                 @if($follow->user_id == Auth::user()->id && $follow->follower_id == $suggest->id)
+                                          <?php $tmp = false;  ?>
+                                  @endif 
+
+                                  @endforeach 
+                         @endforeach
+
+                         @if ($tmp == true)
+                    <div class="row px-3">
+                         
+                        
                         <div class="col-10 p-0 row">
 
                             <div class="col-4">
@@ -170,6 +208,8 @@
                         </div>
 
                     </div>
+
+                    @endif
                 @endforeach
 
 

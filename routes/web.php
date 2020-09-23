@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
-    });
+    return view('auth.login');
+    })->name('auth.login');
 
 Auth::routes(['verify'=>true]);
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
@@ -43,6 +43,7 @@ Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete')
 // Route::get('/suggest', 'SuggestController@index')->name('suggests') ;
 
 Route::get('/follow/{id}' , 'FollowersControllers@follow')->name('user.follow');
+Route::get('/unfollow/{id}' , 'FollowersControllers@unfollow')->name('user.unfollow');
 
 // ----------------------- User ------------------
 

@@ -19,8 +19,9 @@ class PostsController extends Controller
 
         $posts = Post::get() ;
         $suggests = User::inRandomOrder()->limit(5)->get() ;
+        $user = User::all();
 
-        return view( 'index' , compact('posts' , 'suggests')) ;
+        return view( 'index' , compact('posts' , 'suggests' , 'user')) ;
     }
 
     public function create(){
