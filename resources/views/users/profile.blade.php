@@ -69,10 +69,68 @@
             <div class="profile-stats">
 
                 <ul>
-                    <li><span class="profile-stat-count">164</span> posts</li>
-                    <li><span class="profile-stat-count">188</span> followers</li>
-                    <li><span class="profile-stat-count">206</span> following</li>
+                <li><span class="profile-stat-count">{{$user->post()->count()}}</span> posts</li>
+                <li data-toggle="modal" data-target="#exampleModalCenter1"><span class="profile-stat-count">{{$user->followings()->count()}}</span> followers</li>
+                <li data-toggle="modal" data-target="#exampleModalCenter2"><span class="profile-stat-count">{{$user->followers()->count()}}</span> following</li>
                 </ul>
+
+                {{-- try to display the following and followers list --}}
+              
+
+                {{-- <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="text-center">
+                          <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active">
+                              Followers
+                            </a>
+                            @foreach ($user->followers as $follow)
+                            <a href="#" class="list-group-item list-group-item-action"> 
+                              <div class="row">
+
+                             
+                            <img style="width: 10%" class="edit-img" src="{{asset('img/try.jpg')}}" alt="">
+                              <h6 class="m-2 mt-2" style="font-weight: 600 ">{{$follow->user_id}}</h6>  
+                            </div> 
+                            </a>
+                             @endforeach
+                          </div>
+                      </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        hi 2
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+  --}}
+
+
+
 
             </div>
 
@@ -81,8 +139,22 @@
                 <p><span style="display: block;"class="profile-real-name">{{$user->full_name}}</span>
                      {{$user->bio}} </p>
                     @if(!Auth::check() || $user->id !== Auth::user()->id )
-                     <button class="btn btn-primary">Follow</button>
-                     @endif
+                          <?php $tmp = false;  ?>
+                       @foreach ($users as $u)   
+                    @foreach($u->followers as $follow)
+                        
+                         @if (Auth::user()->id == $follow->user_id && $user->id == $follow->follower_id)
+                                 <?php $tmp = true;  ?>
+                         @endif 
+
+                     @endforeach    
+                      @endforeach
+                      @if ($tmp) 
+                     <a href="{{route('user.unfollow' , $user->id)}}"> <button class="btn btn-danger">Unfollow</button> </a>
+                      @else 
+                    <a href="{{route('user.follow' , $user->id)}}"> <button class="btn btn-primary">Follow</button> </a>
+                    @endif 
+                    @endif
             </div>
 
             

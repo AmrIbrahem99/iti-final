@@ -6,8 +6,7 @@ use App\Post;
 use App\User;
 
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -20,14 +19,14 @@ class PostsController extends Controller
 
         $posts = Post::get() ;
         $suggests = User::inRandomOrder()->limit(5)->get() ;
+        $user = User::all();
 
-        return view( 'index' , compact('posts' , 'suggests')) ;
+        return view( 'index' , compact('posts' , 'suggests' , 'user')) ;
     }
 
     public function create(){
         return view(
-            'posts.create'
-        );
+            'posts.create', compact('id'));
     }
 
     public function store(Request $request){
@@ -45,7 +44,7 @@ class PostsController extends Controller
         $img->move( public_path('img/posts') ,$name ) ;
 
         Post::create([
-            'user_id' => '1' ,
+            'user_id' => Auth::user()->id,
             'body' => $request->body ,
             'image'=> $name
         ]) ;

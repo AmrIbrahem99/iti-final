@@ -77,7 +77,6 @@
 @extends('layout')
 @section('styles')
   <link rel="stylesheet" href="{{ asset('css/signInStyle.css') }}">
-
 @endsection
 
 
@@ -88,7 +87,7 @@
 @section('content')
 
 <div style="padding: 2rem 0">
-
+<div class="text-center m-auto">
     <span id="root">
       <section class="section-all">
 
@@ -209,6 +208,7 @@
 
       </section>
     </span> <!-- Root -->
+  </div>
 </div>
     <!-- Select Link -->
     <script type="text/javascript">

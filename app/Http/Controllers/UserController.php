@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     public function profile ($id){   
         $user = User::findOrFail($id);
-        return view('users.profile' , compact('user'));
+        $users = User::all();
+        return view('users.profile' , compact('user' , 'users'));
     }
 
     public function edit ($id) {

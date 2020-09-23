@@ -102,7 +102,7 @@
 
            @if(!Auth::check())
 
-           @if (Route::currentRouteName() !== 'login')
+           @if (Route::currentRouteName() !== 'login' && Route::currentRouteName() !== 'auth.login')
             <li class="nav-item active">
                 <a class="nav-link mt-2" href="{{route('login')}}"> <button class="btn btn-primary">Login</button><span class="sr-only">(current)</span></a>
             </li>
