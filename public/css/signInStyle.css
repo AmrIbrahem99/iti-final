@@ -350,7 +350,7 @@
       margin:0 auto;
     }
 
-    /* .btn {
+    .btn {
       cursor: pointer;
       width: 100%;
       padding:0 8px;
@@ -364,7 +364,7 @@
       line-height: 26px;
       outline: none;
       white-space: nowrap;
-    } */
+    }
 
     .input-box {
       border: 1px solid #efefef;

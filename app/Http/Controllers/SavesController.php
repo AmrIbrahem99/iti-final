@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\SavePost;
+use App\Post;
+use App\User;
+use App\UserPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -10,30 +13,46 @@ use Illuminate\Support\Facades\Auth;
 class SavesController extends Controller
 {
 
+    use softDeletes;
 
-    // public function index(){
 
-    //     $savePosts = SavePost::get() ;
-
-    //     return view('index')->compact($savePosts) ;
-
-    // }
 
     public function save($post_id){
 
-        DB::table('user_post')->insert(
+
+        DB::table('user_posts')->insert(
             [
                 'user_id' => Auth::user()->id,
                 'post_id' => $post_id ,
                 'created_at' => NOW()
-            ]
-        );
+                ]
+            );
 
-        // Bug Back .. should bo return current view without reload
-        return redirect()->back();
+
+            // Bug Back .. should bo return current view without reload
+            return  redirect(route('posts')) ;
+
+    }
+
+
+    public function allSaved(){
+
+        $user = Auth::user();
+        $posts = $user->posts;
+
+        return view('users\allSaved', compact('posts') )  ;
+
+    }
+
+    public function delete($id){
+
+        DB::table('user_posts')->where( 'post_id' , '=' , $id )->delete() ;
+
+        return  redirect(route('posts')) ;
 
 
     }
+
 
 
 }

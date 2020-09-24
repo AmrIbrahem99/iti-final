@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
-    });
+    return view('auth.login');
+    })->name('auth.login');
 
 Auth::routes(['verify'=>true]);
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
@@ -43,6 +43,7 @@ Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete')
 // Route::get('/suggest', 'SuggestController@index')->name('suggests') ;
 
 Route::get('/follow/{id}' , 'FollowersControllers@follow')->name('user.follow');
+Route::get('/unfollow/{id}' , 'FollowersControllers@unfollow')->name('user.unfollow');
 
 // ----------------------- User ------------------
 
@@ -75,5 +76,12 @@ Route::get('/logout', 'UserController@logout')->name('logout');
 // -------------- save post ----------------
 
 Route::get('posts/save/{id}' , 'SavesController@save')->name('posts.save');
+Route::get('posts/save/{id}/delete' , 'SavesController@delete')->name('posts.save.delete');
 
 
+Route::get('users/{id}/allSaved' , 'SavesController@allSaved') ->name('users.allSaved');
+
+
+//--------------- like post ---------------
+
+Route::get('posts/like/{id}' , 'LikesController@like')->name('posts.like');

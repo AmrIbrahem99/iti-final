@@ -6,6 +6,7 @@ use App\Post;
 use App\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -13,17 +14,14 @@ class PostsController extends Controller
 
     public  function index(){
 
-        $saves = new Post ;
-        $savePosts = $saves->users() ;
-        dd($savePosts) ;
-
-
         $posts = Post::get() ;
-
         $suggests = User::inRandomOrder()->limit(5)->get() ;
+        $user = User::all();
 
 
-        return view( 'index' , compact('posts' , 'suggests' )) ;
+        $save_posts = DB::table('user_posts')->select('user_id' , 'post_id')->get();
+
+        return view( 'index' , compact('posts' , 'suggests' , 'user' , 'save_posts')) ;
     }
 
     public function create(){

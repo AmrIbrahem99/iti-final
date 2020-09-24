@@ -20,16 +20,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function followings()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+
+
     }
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+        // return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+        return $this->hasMany('App\Followers');
+
     }
     public function posts()
     {
-        return $this->belongsToMany(Post::class, 'user_post');
+        return $this->belongsToMany(Post::class, 'user_posts');
     }
+
     public function posts_likes()
     {
         return $this->belongsToMany(Post::class, 'likes');
@@ -40,9 +45,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    // public function saves_posts()
+
+
+    // public function user_post()
     // {
-    //    return $this->hasMany('App\SavePost');
+    //    return $this->hasMany('App\UserPost');
     // }
 
 
