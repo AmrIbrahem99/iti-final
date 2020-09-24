@@ -43,12 +43,12 @@ class LoginController extends Controller
     public function callback()
     {
        /** @var   \Laravel\Socialite\Two\User $user */
-         $user=Socialite::driver('facebook')->user();
+         $user=Socialite::driver('facebook')->stateless()->user();
             $providerUser=\App\AuthProvider::where('provider_user_id',$user->getId())->first();
 
             if($providerUser){
            \Illuminate\Support\Facades\Auth::loginUsingId($providerUser->user_id);
-                return redirect('/home');
+                return redirect('posts');
             }
 
             $createdUser=\App\User::create(
@@ -59,13 +59,13 @@ class LoginController extends Controller
             new \App\AuthProvider(
                 ['provider'=>'facebook','provider_user_id'=>$user->getId()])
             );
-       return redirect('/home');
+        return redirect('posts');
     }
 
 
-    public function redirect()
-    {
-        return Socialite::driver('facebook')->redirect();
+   public function redirect()
+   {
+       return Socialite::driver('facebook')->redirect();
     }
 
     public function authenticated(Request $request, $user)

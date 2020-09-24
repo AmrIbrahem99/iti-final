@@ -86,5 +86,9 @@ class PostsController extends Controller
 
     }
 
-
+    public function show($id)
+    {
+        $post= Post::find($id);
+        return redirect(route('post.show',compact('post'))) ;
+    }
 }

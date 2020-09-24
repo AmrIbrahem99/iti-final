@@ -11,13 +11,9 @@ class Post extends Model
     ] ;
 
     public function user() {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo('App\User');
     }
 
-    public function comments()
-    {
-        return $this->morphMany(Comment::class, 'commentable')->whereNull('post_id');
-    }
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_post');
@@ -30,5 +26,9 @@ class Post extends Model
     public function tag()
     {
         return $this->belongsToMany(Tag::class, 'post_tag');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment');
     }
 }
