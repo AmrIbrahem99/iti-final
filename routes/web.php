@@ -19,7 +19,7 @@ Route::get('/', function () {
     })->name('auth.login');
 
 Auth::routes(['verify'=>true]);
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+ Route::get('/posts', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/posts', 'PostsController@index')->name('posts')->middleware('auth');
 Route::get('/redirect/facebook', 'Auth\LoginController@redirect');
 Route::get('login/callback/facebook', 'Auth\LoginController@callback');
@@ -35,7 +35,7 @@ Route::post('/posts/store', 'PostsController@store')->name('posts.store')->middl
 
 Route::get('/posts/edit/{id}', 'PostsController@edit')->name('posts.edit')->middleware('auth');
 Route::post('/posts/update/{id}', 'PostsController@update')->name('posts.update')->middleware('auth');
-
+Route::get('/posts/show/{id}', 'PostsController@show')->name('post.show');
 
 Route::get('/posts/delete/{id}', 'PostsController@delete')->name('posts.delete')->middleware('auth');
 
@@ -63,3 +63,8 @@ Route::get('/users/img/{id}' , 'UserController@deleteImg')->name('users.deleteIm
 Route::get('/users/post/{id}' , 'UserController@viewpost')->name('users.viewpost');
 
 Route::get('/logout', 'UserController@logout')->name('logout');
+
+// ----------------------- Comments ------------------
+
+Route::post('/comment/store', 'CommentController@store')->name('comment.add');
+//Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');

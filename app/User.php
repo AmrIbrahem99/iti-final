@@ -15,10 +15,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Post');
     }
 
+    public function comment() {
+        return $this->hasMany('App\Comment');
+    }
+
     public function followings()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
-        
+
 
     }
 
@@ -49,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'full_name', 'email', 'password', 'user_name' , 'gender' , 'website' , 
+        'full_name', 'email', 'password', 'user_name' , 'gender' , 'website' ,
         'phone' , 'bio' , 'avatar'
     ];
 

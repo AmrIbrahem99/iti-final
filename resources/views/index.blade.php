@@ -10,14 +10,14 @@
 @section('content')
     {{-- New Post --}}
     <div style="padding: 2rem 0">
-    
+
     <section >
-         
+
         <a style="margin-top:10px" type="button" href="" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
             New Post
         </a>
-    
-      
+
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -80,19 +80,19 @@
             @foreach($posts as $post)
                 <?php $tmp = false; ?>
                      @foreach ($user as $u)
-                          
+
                          @foreach ($u->followers as $follow)
                              {{-- check if i follow the user who posted --}}
                             @if (Auth::user()->id == $follow->user_id && $follow->follower_id == $post->user->id)
-                              <?php $tmp = true; ?> 
+                              <?php $tmp = true; ?>
                             @endif
                             {{-- check if the post is mine --}}
                             @if (Auth::user()->id == $post->user->id)
-                            <?php $tmp = true; ?> 
+                            <?php $tmp = true; ?>
                             @endif
 
                          @endforeach
-                    @endforeach    
+                    @endforeach
               @if ($tmp)
                 <div class="post my-5">
                     <header class="row px-3 py-2">
@@ -133,18 +133,21 @@
                             <p> {{$post->body}} </p>
                         </div>
                         <footer class="">
-                            <form action="">
+                            <form action="{{route('comment.add')}}" method="POST">
+                                @csrf
                                 <div class="input-group ">
-                                    <input type="text" class="form-control " placeholder="Comment... " >
+                                    <input type="text" name="comment_body" id="comment_body" class="form-control " placeholder="Comment... " >
+                                    <input type="hidden" name="post_id" value="{{ $posts->id }}" />
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">Post</button>
+                                        <button class="btn btn-outline-secondary" type="submit" >Post</button>
+                                        <a href="{{ route('post.show', $posts->id) }}" class="btn btn-primary">Show Post</a>
                                     </div>
                                 </div>
                             </form>
                         </footer>
                     </footer>
                 </div>
-           
+
                 @endif
             @endforeach
 
@@ -164,7 +167,7 @@
                     <a href="" class="allFolwers" > <p class="text-dark "> See All</p></a>
                 </div>
             </header>
-            
+
                 @foreach($suggests as $suggest)
                        <?php $tmp = true ?>
                        @if (Auth::user()->id == $suggest->id)
@@ -172,35 +175,33 @@
                         @endif
 
                         @foreach ($user as $u)
-                          
+
                               @foreach ($u->followers as $follow)
-                                    
-                                 
+
+
                                  @if($follow->user_id == Auth::user()->id && $follow->follower_id == $suggest->id)
                                           <?php $tmp = false;  ?>
-                                  @endif 
+                                  @endif
 
-                                  @endforeach 
+                                  @endforeach
                          @endforeach
 
                          @if ($tmp == true)
                     <div class="row px-3">
-                         
-                        
+
+
                         <div class="col-10 p-0 row">
 
                             <div class="col-4">
-                                <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                <a class="newAcc" href="{{route('users.profile' , $suggest->id )}}">
                                     <img src="{{asset('img/users/' . $suggest->avatar)}}" class="rounded-circle w-100 pt-1" alt="">
                                 </a>
                                 </div>
                                 <div class="col-8 pt-4">
-                                    <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                    <a class="newAcc" href="{{route('users.profile' , $suggest->id )}}">
                                         <h6 class="">{{$suggest->full_name}}</h6>
                                     </a>
                                 </div>
-                            </a>
-
                         </div>
 
                         <div class="col-2 text-right py-4 pr-0">
