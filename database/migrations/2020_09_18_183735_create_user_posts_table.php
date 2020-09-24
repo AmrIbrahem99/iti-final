@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPostTable extends Migration
+class CreateUserPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserPostTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_post', function (Blueprint $table) {
+        Schema::create('user_posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->unsigned();
             $table->foreignId('post_id')->constrained()->onDelete('cascade')->unsigned();
@@ -29,6 +29,6 @@ class CreateUserPostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_post');
+        Schema::dropIfExists('user_posts');
     }
 }

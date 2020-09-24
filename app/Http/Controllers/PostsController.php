@@ -18,10 +18,12 @@ class PostsController extends Controller
         $suggests = User::inRandomOrder()->limit(5)->get() ;
         $user = User::all();
 
-
         $save_posts = DB::table('user_posts')->select('user_id' , 'post_id')->get();
+        $like_posts = DB::table('likes')->select('user_id' , 'post_id')->get() ;
 
-        return view( 'index' , compact('posts' , 'suggests' , 'user' , 'save_posts')) ;
+
+
+        return view( 'index' , compact('posts' , 'suggests' , 'user' , 'save_posts' , 'like_posts')) ;
     }
 
     public function create(){
@@ -86,5 +88,10 @@ class PostsController extends Controller
 
     }
 
-
+    public function show($id)
+    {
+        $post= Post::find($id);
+        // return redirect(route('post.show',compact('post'))) ;
+        return view ( 'posts.show' , compact('post') );
+    }
 }

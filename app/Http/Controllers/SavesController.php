@@ -44,12 +44,11 @@ class SavesController extends Controller
 
     }
 
-    public function delete($id){
+    public function unsave($id){
 
         DB::table('user_posts')->where( 'post_id' , '=' , $id )->delete() ;
 
         return  redirect(route('posts')) ;
-
 
     }
 

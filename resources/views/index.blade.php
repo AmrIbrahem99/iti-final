@@ -121,7 +121,23 @@
                     <footer class="">
                         <header class="row justify-content-between icones py-2 px-3">
                             <div class="px-3">
-                                <a href="{{route('posts.like', $post->id)}}" class="pr-2"><i class="far fa-heart"></i></a>
+
+                                @if (sizeof($like_posts) == 0)
+                                <a href="{{route('posts.like', $post->id)}}"><i class="far fa-heart"></i></a>
+                                @endif
+                                @foreach($like_posts as $like)
+
+                                        @if ( $like->user_id == Auth::user()->id &&
+                                                $like->post_id == $post->id )
+                                            <a href="{{route('posts.unlike', $post->id)}}"><i class="fas fa-heart"></i></a>
+                                        @elseif ($like->user_id != Auth::user()->id ||
+                                                $like->post_id != $post->id)
+                                            <a href="{{route('posts.like', $post->id)}}"><i class="far fa-heart"></i></a>
+
+                                        @endif
+                                @endforeach
+
+
                                 <a href="" class="pr-2"><i class="far fa-comment"></i></a>
                                 <a href="" class="pr-2"><i class="fas fa-location-arrow"></i></a>
                             </div>
@@ -136,7 +152,7 @@
 
                                         @if ( $save->user_id == Auth::user()->id &&
                                                 $save->post_id == $post->id )
-                                            <a href="{{route('posts.save.delete', $post->id)}}"><i class="fas fa-bookmark"></i></i></a>
+                                            <a href="{{route('posts.unsave', $post->id)}}"><i class="fas fa-bookmark"></i></a>
                                         @elseif ($save->user_id != Auth::user()->id ||
                                                  $save->post_id != $post->id)
                                             <a href="{{route('posts.save', $post->id)}}"><i class="far fa-bookmark"></i></a>
@@ -149,14 +165,24 @@
                             </div>
                         </header>
                         <div class="px-3">
+                            <?php $likesNum = 0 ;?>
+                            @foreach ( $post->users_likes as $num)
+                                <?php $likesNum = $likesNum + 1 ;  ?>
+
+                            @endforeach
+                            <h6 class="font-weight-bold text-muted">{{$likesNum}} . Likes on this post</h6>
+
                             <p> {{$post->body}} </p>
                         </div>
                         <footer class="">
-                            <form action="">
+                            <form action="{{route('comment.add')}}" method="POST">
+                                @csrf
                                 <div class="input-group ">
-                                    <input type="text" class="form-control " placeholder="Comment... " >
+                                    <input type="text" name="comment_body" id="comment_body" class="form-control " placeholder="Comment... " >
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}" />
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">Post</button>
+                                        <button class="btn btn-outline-secondary" type="submit" >Post</button>
+                                        <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary">Show Post</a>
                                     </div>
                                 </div>
                             </form>
@@ -209,17 +235,15 @@
                         <div class="col-10 p-0 row">
 
                             <div class="col-4">
-                                <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
-                                    <img src="{{asset('img/users/' . $suggest->avatar)}}" height="68px" class="rounded-circle w-100 pt-1" alt="">
+                                <a class="newAcc" href="{{route('users.profile' , $suggest->id )}}">
+                                    <img src="{{asset('img/users/' . $suggest->avatar)}}" height="70px" class="rounded-circle w-100 pt-1" alt="">
                                 </a>
                                 </div>
                                 <div class="col-8 pt-4">
-                                    <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                    <a class="newAcc" href="{{route('users.profile' , $suggest->id )}}">
                                         <h6 class="">{{$suggest->full_name}}</h6>
                                     </a>
                                 </div>
-                            </a>
-
                         </div>
 
                         <div class="col-2 text-right py-4 pr-0">

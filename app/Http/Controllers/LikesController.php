@@ -16,7 +16,7 @@ class LikesController extends Controller
                 'user_id' => Auth::user()->id,
                 'post_id' => $post_id ,
                 'created_at' => NOW()
-                ]
+            ]
             );
 
 
@@ -26,8 +26,31 @@ class LikesController extends Controller
     }
 
 
+    public function unlike($id){
+
+        DB::table('likes')->where( 'post_id' , '=' , $id )->delete() ;
+
+        return  redirect(route('posts')) ;
+
+    }
 
 
+
+
+    public function likesNum($post_id){
+
+
+        $likesNum = DB::table('likes')
+        ->select(DB::raw('count(*) as user_count, status'))
+        ->where('post_id', '=', $post_id)
+        ->get();
+
+
+
+        return view(
+            'index', compact('likesNum'));
+
+    }
 
 
 

@@ -9,13 +9,13 @@ class Comment extends Model
 
     protected $guarded = [];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function user() {
+        return $this->belongsTo('App\User');
     }
 
-    public function replies()
-    {
-        return $this->hasMany(Comment::class, 'post_id');
+
+    public function post() {
+        return $this->belongsTo('App\Post');
     }
+
 }
