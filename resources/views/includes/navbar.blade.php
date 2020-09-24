@@ -109,7 +109,7 @@
             @endif
             @if (Route::currentRouteName() !== 'register')
             <li class="nav-item active">
-                <a class="nav-link mt-2" href="{{route('register')}}"> <button class="btn btn-primary">Register</button><span class="sr-only">(current)</span></a>
+                <a class="nav-link mt-2" href="{{route('register')}}"> <button class="btn btn-primary">Signup</button><span class="sr-only">(current)</span></a>
             </li>
             @endif
 

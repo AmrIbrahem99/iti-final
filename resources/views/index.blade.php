@@ -190,12 +190,12 @@
                         <div class="col-10 p-0 row">
 
                             <div class="col-4">
-                                <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                <a class="newAcc" href="{{route('users.profile' , $suggest->id )}}">
                                     <img src="{{asset('img/users/' . $suggest->avatar)}}" class="rounded-circle w-100 pt-1" alt="">
                                 </a>
                                 </div>
                                 <div class="col-8 pt-4">
-                                    <a class="newAcc" href="{{--route('' , $suggest->id)--}}">
+                                    <a class="newAcc" href="{{route('users.profile' , $suggest->id )}}">
                                         <h6 class="">{{$suggest->full_name}}</h6>
                                     </a>
                                 </div>
