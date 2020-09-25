@@ -87,7 +87,7 @@
                               <?php $tmp = true; ?>
                             @endif
                             {{-- check if the post is mine --}}
-                            @if (Auth::user()->id == $post->user->id)
+                            @if (Auth::user()->id == $post->user_id)
                             <?php $tmp = true; ?>
                             @endif
 
@@ -114,6 +114,8 @@
 
                             </div>
                         </div>
+                       
+                    <span style="font-size: 15px; font-weight:500" class="text-success mx-4">{{$post->created_at->diffForHumans()}}</span>
                     </header>
                     <div>
                         <img src="{{asset('img/posts/'.$post->image)}}" class="w-100  pb-3"  alt="">
@@ -122,55 +124,62 @@
                         <header class="row justify-content-between icones py-2 px-3">
                             <div class="px-3">
 
-                                @if (sizeof($like_posts) == 0)
-                                <a href="{{route('posts.like', $post->id)}}"><i class="far fa-heart"></i></a>
-                                @endif
+                                
+                                <?php $liked = false; ?>
                                 @foreach($like_posts as $like)
 
                                         @if ( $like->user_id == Auth::user()->id &&
                                                 $like->post_id == $post->id )
-                                            <a href="{{route('posts.unlike', $post->id)}}"><i class="fas fa-heart"></i></a>
-                                        @elseif ($like->user_id != Auth::user()->id ||
-                                                $like->post_id != $post->id)
-                                            <a href="{{route('posts.like', $post->id)}}"><i class="far fa-heart"></i></a>
-
+                                                <?php $liked = true; ?>
+                                           
+                                        @elseif ($like->user_id !== Auth::user()->id &&
+                                                $like->post_id !== $post->id)
+                                                <?php $liked = false; ?>
                                         @endif
-                                @endforeach
+                                @endforeach 
+
+                                @if ($liked) 
+                                <a href="{{route('posts.unlike', $post->id)}}"><i class="fas fa-heart text-danger"></i></a>
+                                @else  
+                                <a href="{{route('posts.like', $post->id)}}"><i class="far fa-heart"></i></a>
+                                @endif
 
 
-                                <a href="" class="pr-2"><i class="far fa-comment"></i></a>
-                                <a href="" class="pr-2"><i class="fas fa-location-arrow"></i></a>
+                                <a href="#" class="pr-2"><i class="far fa-comment"></i></a>
+                                
                             </div>
                             <div class="px-3">
 
-
-                                @if (sizeof($save_posts) == 0)
-                                    <a href="{{route('posts.save', $post->id)}}"><i class="far fa-bookmark"></i></a>
-                                @endif
+                                 <?php $saved = false; ?>
+                            
                                 @foreach($save_posts as $save)
-                                    {{-- @if ( $save->post_id !== $post->id ) --}}
+                                    
 
                                         @if ( $save->user_id == Auth::user()->id &&
                                                 $save->post_id == $post->id )
-                                            <a href="{{route('posts.unsave', $post->id)}}"><i class="fas fa-bookmark"></i></a>
-                                        @elseif ($save->user_id != Auth::user()->id ||
-                                                 $save->post_id != $post->id)
-                                            <a href="{{route('posts.save', $post->id)}}"><i class="far fa-bookmark"></i></a>
+                                                <?php $saved = true; ?>
+                                            
+                                        @elseif ($save->user_id !== Auth::user()->id &&
+                                                 $save->post_id !== $post->id)
+                                                 <?php $saved = false; ?>
+                                         
 
                                         @endif
                                 @endforeach
+
+                                @if ($saved)
+                                <a href="{{route('posts.unsave', $post->id)}}"><i class="fas fa-bookmark"></i></a>
+                                @else 
+                                <a href="{{route('posts.save', $post->id)}}"><i class="far fa-bookmark"></i></a>
+                                @endif
 
 
 
                             </div>
                         </header>
                         <div class="px-3">
-                            <?php $likesNum = 0 ;?>
-                            @foreach ( $post->users_likes as $num)
-                                <?php $likesNum = $likesNum + 1 ;  ?>
-
-                            @endforeach
-                            <h6 class="font-weight-bold text-muted">{{$likesNum}} . Likes on this post</h6>
+                            
+                            <h6 class="font-weight-bold text-muted">{{$post->users_likes->count()}} Likes and {{$post->comments->count()}} Comment  </h6>
 
                             <p> {{$post->body}} </p>
                         </div>
@@ -182,7 +191,7 @@
                                     <input type="hidden" name="post_id" value="{{ $post->id }}" />
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="submit" >Post</button>
-                                        <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary">Show Post</a>
+                                        <a href="{{ route('users.viewpost', $post->id) }}" class="btn btn-primary">Show Post</a>
                                     </div>
                                 </div>
                             </form>
@@ -206,7 +215,7 @@
                     <p class="text-muted ">Suggestions For You</p>
                 </div>
                 <div>
-                    <a href="" class="allFolwers" > <p class="text-dark "> See All</p></a>
+                <a href="" class="allFolwers" > <p class="text-dark "> See All</p></a>
                 </div>
             </header>
 

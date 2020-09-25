@@ -38,9 +38,10 @@ class SavesController extends Controller
     public function allSaved(){
 
         $user = Auth::user();
-        $posts = $user->posts;
+        $saved = $user->posts;
 
-        return view('users\allSaved', compact('posts') )  ;
+        return view('users.profile', compact('saved') )  ;
+        // return redirect(route('users.profile' , $id));
 
     }
 

@@ -11,10 +11,16 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserController extends Controller
 {
-    public function profile ($id){   
+    public function profile ($id){  
+
+      
+        $cuser = Auth::user();
+        $saved = $cuser->posts;
+       
+       
         $user = User::findOrFail($id);
         $users = User::all();
-        return view('users.profile' , compact('user' , 'users'));
+        return view('users.profile' , compact('user' , 'users' , 'saved'));
     }
 
     public function edit ($id) {

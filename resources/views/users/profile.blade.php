@@ -230,11 +230,12 @@
       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"> 
           <i class="fas fa-th"></i> Posts</a>
     </li>
+    @if ($user->id == Auth::user()->id)   
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
         <i class="far fa-bookmark"></i> Saved</a>
     </li>
-
+    @endif
   </ul>
   
   <div class="tab-content" id="myTabContent">
@@ -247,11 +248,11 @@
                  
                @foreach ($user->post as $item)
                    
-                  <div class="col-md-4 mb-2">
+                  <div class="col-md-4 my-3">
                       <div class="user-post">
                           
                       <a href="{{route('users.viewpost' , ['id' => $item->id ])}}"> 
-                         <img class="w-100 img-element" src="{{asset('img/posts/' . $item->image)}}" alt=""> 
+                         <img style="height: 350px" class="w-100 img-element" src="{{asset('img/posts/' . $item->image)}}" alt=""> 
                       </a>
 
                        </div>
@@ -262,12 +263,31 @@
         
 
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> Saved
+    @if ($user->id == Auth::user()->id)   
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"> 
+
+      <div class="container py-1">
+        <div class="row">
+           
+         @foreach ($saved as $item)
+             
+            <div class="col-md-4 my-3">
+                <div class="user-post">
+                    
+                <a href="{{route('users.viewpost' , ['id' => $item->id ])}}"> 
+                   <img style="height: 350px" class="w-100 img-element" src="{{asset('img/posts/' . $item->image)}}" alt=""> 
+                </a>
+
+                 </div>
+           </div>
+           @endforeach
+          </div>
+       </div>
 
 
 
     </div>
-    
+      @endif
   </div>
 
 </div>
