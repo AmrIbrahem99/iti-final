@@ -19,9 +19,16 @@ Route::get('/', function () {
     })->name('auth.login');
 
 Auth::routes(['verify'=>true]);
+<<<<<<< HEAD
  Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/posts', 'PostsController@index' )->name('posts')->middleware('auth','verified');
 Route::get('/posts', 'PostsController@index')->name('posts')->middleware('verified');
+=======
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/posts', 'PostsController@index' )->name('posts')->middleware('auth');
+Route::get('/posts', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/posts', 'PostsController@index')->name('posts')->middleware('auth');
+>>>>>>> 56af0999750ffed5e7ea8b8f2c00b17b9d58c497
 Route::get('/redirect/facebook', 'Auth\LoginController@redirect');
 Route::get('login/callback/facebook', 'Auth\LoginController@callback');
 
@@ -67,7 +74,10 @@ Route::get('/logout', 'UserController@logout')->name('logout');
 
 
 
+// Search
 
+Route::get('/users/all' , 'UserController@all')->name('users.all')->middleware('auth');
+Route::get('/users/search' , 'UserController@search')->name('users.search')->middleware('auth');
 
 
 

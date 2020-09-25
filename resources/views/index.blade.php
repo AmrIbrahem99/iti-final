@@ -114,8 +114,7 @@
 
                             </div>
                         </div>
-                       
-                    <span style="font-size: 15px; font-weight:500" class="text-success mx-4">{{$post->created_at->diffForHumans()}}</span>
+
                     </header>
                     <div>
                         <img src="{{asset('img/posts/'.$post->image)}}" class="w-100  pb-3"  alt="">
@@ -124,52 +123,52 @@
                         <header class="row justify-content-between icones py-2 px-3">
                             <div class="px-3">
 
-                                
+
                                 <?php $liked = false; ?>
                                 @foreach($like_posts as $like)
 
                                         @if ( $like->user_id == Auth::user()->id &&
                                                 $like->post_id == $post->id )
                                                 <?php $liked = true; ?>
-                                           
+
                                         @elseif ($like->user_id !== Auth::user()->id &&
                                                 $like->post_id !== $post->id)
                                                 <?php $liked = false; ?>
                                         @endif
-                                @endforeach 
+                                @endforeach
 
-                                @if ($liked) 
+                                @if ($liked)
                                 <a href="{{route('posts.unlike', $post->id)}}"><i class="fas fa-heart text-danger"></i></a>
-                                @else  
+                                @else
                                 <a href="{{route('posts.like', $post->id)}}"><i class="far fa-heart"></i></a>
                                 @endif
 
 
                                 <a href="#" class="pr-2"><i class="far fa-comment"></i></a>
-                                
+
                             </div>
                             <div class="px-3">
 
                                  <?php $saved = false; ?>
-                            
+
                                 @foreach($save_posts as $save)
-                                    
+
 
                                         @if ( $save->user_id == Auth::user()->id &&
                                                 $save->post_id == $post->id )
                                                 <?php $saved = true; ?>
-                                            
+
                                         @elseif ($save->user_id !== Auth::user()->id &&
                                                  $save->post_id !== $post->id)
                                                  <?php $saved = false; ?>
-                                         
+
 
                                         @endif
                                 @endforeach
 
                                 @if ($saved)
                                 <a href="{{route('posts.unsave', $post->id)}}"><i class="fas fa-bookmark"></i></a>
-                                @else 
+                                @else
                                 <a href="{{route('posts.save', $post->id)}}"><i class="far fa-bookmark"></i></a>
                                 @endif
 
@@ -178,12 +177,15 @@
                             </div>
                         </header>
                         <div class="px-3">
-                            
+
                             <h6 class="font-weight-bold text-muted">{{$post->users_likes->count()}} Likes and {{$post->comments->count()}} Comment  </h6>
 
                             <p> {{$post->body}} </p>
+
+                            <span style="font-size: 15px; font-weight:500" class="text-muted ">{{$post->created_at->diffForHumans()}}</span>
+
                         </div>
-                        <footer class="">
+                        <footer class="mt-2">
                             <form action="{{route('comment.add')}}" method="POST">
                                 @csrf
                                 <div class="input-group ">
@@ -215,7 +217,7 @@
                     <p class="text-muted ">Suggestions For You</p>
                 </div>
                 <div>
-                <a href="" class="allFolwers" > <p class="text-dark "> See All</p></a>
+                    <a href="{{route('users.all')}}" class="allFolwers" > <p class="text-dark "> See All</p></a>
                 </div>
             </header>
 
