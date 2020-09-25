@@ -97,11 +97,15 @@
                 <div class="post my-5">
                     <header class="row px-3 py-2">
                         <div class="col-1 ">
-                            <img src="{{asset('img/users/' . $post->user->avatar)}}" height="32px" class="rounded-circle w-100 pt-1" alt="">
+                            <a href = "{{route('users.profile' , $post->user->id )}}" class="text-decoration-none text-dark font-weight-bold">
+                                <img src="{{asset('img/users/' . $post->user->avatar)}}" height="32px" class="rounded-circle w-100 pt-1" alt="">
+                            </a>
                         </div>
                         <div class="col-11 row justify-content-between px-0">
                             <div class="col-9">
-                                <h6 class="pt-2"> {{$post->user->user_name}} </h6>
+                                <a href = "{{route('users.profile' , $post->user->id )}}" class="text-decoration-none text-dark font-weight-bold">
+                                    <h6 class="pt-2"> {{$post->user->user_name}} </h6>
+                                </a>
                             </div>
                             <div class="col-3 p-0">
                                 @if ($post->user->id == Auth::user()->id)
