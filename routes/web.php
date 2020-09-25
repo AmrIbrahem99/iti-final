@@ -19,6 +19,8 @@ Route::get('/', function () {
     })->name('auth.login');
 
 Auth::routes(['verify'=>true]);
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/posts', 'PostsController@index' )->name('posts')->middleware('auth');
  Route::get('/posts', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/posts', 'PostsController@index')->name('posts')->middleware('auth');
 Route::get('/redirect/facebook', 'Auth\LoginController@redirect');
@@ -63,6 +65,30 @@ Route::get('/users/img/{id}' , 'UserController@deleteImg')->name('users.deleteIm
 Route::get('/users/post/{id}' , 'UserController@viewpost')->name('users.viewpost');
 
 Route::get('/logout', 'UserController@logout')->name('logout');
+
+
+
+
+
+
+
+
+
+
+// -------------- save post ----------------
+
+Route::get('posts/save/{id}' , 'SavesController@save')->name('posts.save');
+Route::get('posts/save/{id}/delete' , 'SavesController@unsave')->name('posts.unsave');
+
+
+Route::get('users/{id}/allSaved' , 'SavesController@allSaved') ->name('users.allSaved');
+
+
+//--------------- like post ---------------
+
+Route::get('posts/like/{id}' , 'LikesController@like')->name('posts.like');
+
+Route::get('posts/like/{id}/delete' , 'LikesController@unlike')->name('posts.unlike');
 
 // ----------------------- Comments ------------------
 

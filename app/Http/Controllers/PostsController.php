@@ -6,22 +6,24 @@ use App\Post;
 use App\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
 
-    public function index(){
+    public  function index(){
 
-        // $followrs = Follower::where('user_id', '=' , 'user_id' )->get();
-
-        // $posts = Post::where('user_id' , '=' , 'follower_id' )->get() ;
-
-        $posts = Post::get() ;
+        $posts = Post::orderBy('created_at' , 'desc')->get();
         $suggests = User::inRandomOrder()->limit(5)->get() ;
         $user = User::all();
 
-        return view( 'index' , compact('posts' , 'suggests' , 'user')) ;
+        $save_posts = DB::table('user_posts')->select('user_id' , 'post_id')->get();
+        $like_posts = DB::table('likes')->select('user_id' , 'post_id')->get() ;
+
+
+
+        return view( 'index' , compact('posts' , 'suggests' , 'user' , 'save_posts' , 'like_posts')) ;
     }
 
     public function create(){
@@ -89,6 +91,7 @@ class PostsController extends Controller
     public function show($id)
     {
         $post= Post::find($id);
-        return redirect(route('post.show',compact('post'))) ;
+        // return redirect(route('post.show',compact('post'))) ;
+        return view ( 'posts.show' , compact('post') );
     }
 }
