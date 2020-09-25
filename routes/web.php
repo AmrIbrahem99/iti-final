@@ -50,7 +50,7 @@ Route::get('/unfollow/{id}' , 'FollowersControllers@unfollow')->name('user.unfol
 
 
 
-Route::get('/users/{id}' , 'UserController@profile')->name('users.profile')->where('id', '[0-9]+');
+Route::get('/users/{id}' , 'UserController@profile')->name('users.profile')->where('id', '[0-9]+')->middleware('auth');;
 
 Route::get('/users/{id}/edit' , 'UserController@edit')->name('users.edit')->middleware('auth');
 
