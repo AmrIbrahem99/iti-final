@@ -95,7 +95,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{route('users.profile' , Auth::user()->id )}}">Profile</a>
               {{-- {{route('users.profile' , $user->id)}} --}}
-                <a class="dropdown-item" href="{{route('users.allSaved' , Auth::user()->id )}}">Saved</a>
+                {{-- <a class="dropdown-item" href="{{route('users.allSaved' , Auth::user()->id )}}">Saved</a> --}}
 
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}">Log Out</a>
