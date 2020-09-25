@@ -18,11 +18,10 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-public function index(){
+
+    public function index(){
         return redirect('/posts');
-
-
-}
+    }
 
     /**
      * Show the application dashboard.

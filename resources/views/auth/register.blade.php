@@ -109,7 +109,7 @@
 
                         <span class="button-box my-5">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('sing up') }}
+                                {{ __('sign up') }}
                             </button>
                         </span>
                          <span class="button-box my-5">

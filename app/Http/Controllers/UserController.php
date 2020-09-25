@@ -117,7 +117,23 @@ class UserController extends Controller
         //logout user
 
         Auth::logout();
-   // redirect to homepage
+    // redirect to homepage
       return redirect('login');
     }
+
+    public function all(){
+
+        $users = User::get() ;
+        return view('users.allUsers' , compact( 'users' ) ) ;
+    }
+
+    public function search( Request $request){
+        $keyword = $request->keyword ;
+
+        $user = User::where('user_name' , 'like' , "%$keyword%" )->get() ;
+        return response()->json($user) ;
+    }
+
+
+
 }
