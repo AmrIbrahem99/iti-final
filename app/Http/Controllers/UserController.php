@@ -9,15 +9,20 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
+
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function profile ($id){
 
 
         $cuser = Auth::user();
         $saved = $cuser->posts;
-
-
         $user = User::findOrFail($id);
         $users = User::all();
         return view('users.profile' , compact('user' , 'users' , 'saved'));
@@ -112,27 +117,7 @@ class UserController extends Controller
         //logout user
 
         Auth::logout();
-        // redirect to homepage
-        return redirect('login');
+   // redirect to homepage
+      return redirect('login');
     }
-
-
-
-
-
-    public function all(){
-
-        $users = User::get() ;
-        return view('users.allUsers' , compact( 'users' ) ) ;
-    }
-
-    public function search( Request $request){
-        $keyword = $request->keyword ;
-
-        $user = User::where('user_name' , 'like' , "%$keyword%" )->get() ;
-        return response()->json($user) ;
-    }
-
-
-
 }

@@ -19,10 +19,16 @@ Route::get('/', function () {
     })->name('auth.login');
 
 Auth::routes(['verify'=>true]);
+<<<<<<< HEAD
+ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/posts', 'PostsController@index' )->name('posts')->middleware('auth','verified');
+Route::get('/posts', 'PostsController@index')->name('posts')->middleware('verified');
+=======
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/posts', 'PostsController@index' )->name('posts')->middleware('auth');
 Route::get('/posts', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/posts', 'PostsController@index')->name('posts')->middleware('auth');
+>>>>>>> 56af0999750ffed5e7ea8b8f2c00b17b9d58c497
 Route::get('/redirect/facebook', 'Auth\LoginController@redirect');
 Route::get('login/callback/facebook', 'Auth\LoginController@callback');
 
@@ -52,7 +58,7 @@ Route::get('/unfollow/{id}' , 'FollowersControllers@unfollow')->name('user.unfol
 
 
 
-Route::get('/users/{id}' , 'UserController@profile')->name('users.profile')->where('id', '[0-9]+');
+Route::get('/users/{id}' , 'UserController@profile')->name('users.profile')->where('id', '[0-9]+')->middleware('auth')->middleware('verified');;
 
 Route::get('/users/{id}/edit' , 'UserController@edit')->name('users.edit')->middleware('auth');
 
@@ -84,7 +90,7 @@ Route::get('posts/save/{id}' , 'SavesController@save')->name('posts.save');
 Route::get('posts/save/{id}/delete' , 'SavesController@unsave')->name('posts.unsave');
 
 
-Route::get('users/{id}/allSaved' , 'SavesController@allSaved') ->name('users.allSaved');
+Route::get('users/{id}/allSaved' , 'SavesController@allSaved') ->name('users.allSaved')->middleware('verified');
 
 
 //--------------- like post ---------------
